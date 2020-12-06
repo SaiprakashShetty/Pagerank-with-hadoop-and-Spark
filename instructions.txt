@@ -1,0 +1,66 @@
+bin/hdfs namenode -format
+change the mapred-site.xml:
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+ 
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ 
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+ 
+
+<!-- Put site-specific property overrides in this file. -->
+
+ 
+
+<configuration>
+<property>
+ <name>yarn.app.mapreduce.am.env</name>
+ <value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+</property>
+<property>
+ <name>mapreduce.map.env</name>
+ <value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+</property>
+<property>
+ <name>mapreduce.reduce.env</name>
+ <value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+</property>
+
+ 
+
+</configuration>
+
+
+
+
+
+
+
+
+3) sbin/start-all.sh
+4) jps to ensure everything is running
+5) bin/hdfs dfs -mkdir /user
+6) bin/hdfs dfs -mkdir /user/nitish
+7) bin/hdfs dfs -mkdir input
+8) Put the web-google.txt to the input directory
+9) Make necessary changes to the paths according to what is in your system in the iterate-hadoop.sh and check_conv.py files
+10) chmod 755 pagerank/iterate-hadoop.sh
+11) ./pagerank/iterate-hadoop.sh
+12) It runs for a long time ... 40 iterations in total .. you'll know by the number it displays in the terminal as each iteration begins
+
+
+
